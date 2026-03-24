@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ============================================================
+             DATOS DE DEMOSTRACIÓN
+             ============================================================ -->
+
+        <!-- Categorías -->
+        <record id="demo_category_electronics" model="lost.object.category">
+            <field name="name">Electrónica</field>
+        </record>
+
+        <record id="demo_category_clothing" model="lost.object.category">
+            <field name="name">Ropa</field>
+        </record>
+
+        <record id="demo_category_stationery" model="lost.object.category">
+            <field name="name">Papelería</field>
+        </record>
+
+        <!-- Alumnos de prueba -->
+        <record id="demo_student_1" model="school.student">
+            <field name="name">Ana García Martínez</field>
+            <field name="nia">11111</field>
+        </record>
+
+        <record id="demo_student_2" model="school.student">
+            <field name="name">Carlos López Sánchez</field>
+            <field name="nia">22222</field>
+        </record>
+
+        <record id="demo_student_3" model="school.student">
+            <field name="name">María Fernández Torres</field>
+            <field name="nia">33333</field>
+        </record>
+
+        <!-- Objetos Perdidos -->
+        <record id="demo_lost_object_1" model="lost.object">
+            <field name="name">Auriculares Bluetooth negros</field>
+            <field name="description">
+                Auriculares inalámbricos de color negro, marca Sony. Encontrados en el patio
+                junto a las pistas de baloncesto. Llevan funda de tela gris.
+            </field>
+            <field name="category_id" ref="demo_category_electronics"/>
+            <field name="registration_date">2026-03-05</field>
+            <field name="state">lost</field>
+        </record>
+
+        <record id="demo_lost_object_2" model="lost.object">
+            <field name="name">Chaqueta azul marino</field>
+            <field name="description">
+                Chaqueta vaquera azul oscuro, talla M. Encontrada en el comedor escolar
+                en el turno de la tarde. Sin etiqueta de nombre visible.
+            </field>
+            <field name="category_id" ref="demo_category_clothing"/>
+            <field name="registration_date">2026-03-06</field>
+            <field name="state">lost</field>
+        </record>
+
+        <record id="demo_lost_object_3" model="lost.object">
+            <field name="name">Estuche verde con compás</field>
+            <field name="description">
+                Estuche de tela verde botella con un compás de metal, dos bolígrafos y
+                una regla de 30 cm. Hallado en el aula 204.
+            </field>
+            <field name="category_id" ref="demo_category_stationery"/>
+            <field name="registration_date">2026-03-07</field>
+            <field name="state">lost</field>
+        </record>
+
+        <!-- Objeto ya entregado (para demostrar el flujo completo) -->
+        <record id="demo_lost_object_4" model="lost.object">
+            <field name="name">Calculadora científica Casio</field>
+            <field name="description">
+                Calculadora científica Casio fx-82, con el nombre "C.López" escrito con rotulador.
+            </field>
+            <field name="category_id" ref="demo_category_electronics"/>
+            <field name="registration_date">2026-03-04</field>
+            <field name="state">delivered</field>
+            <field name="student_id" ref="demo_student_2"/>
+        </record>
+
+    </data>
+</odoo>

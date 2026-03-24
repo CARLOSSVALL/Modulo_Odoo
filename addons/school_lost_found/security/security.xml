@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================================
+             CATEGORÍAS DE USUARIO (GRUPOS)
+             ============================================================ -->
+
+        <!-- Grupo: Conserje -->
+        <record id="group_lost_janitor" model="res.groups">
+            <field name="name">Conserje de Objetos Perdidos</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="comment">
+                Puede gestionar objetos y categorías. Solo lectura en alumnos.
+            </field>
+        </record>
+
+        <!-- Grupo: Administrador de Objetos Perdidos -->
+        <record id="group_lost_admin" model="res.groups">
+            <field name="name">Administrador de Objetos Perdidos</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="comment">
+                Acceso completo: puede crear, leer, modificar y eliminar
+                alumnos, categorías y objetos perdidos.
+            </field>
+            <!-- El Administrador implica al Conserje -->
+            <field name="implied_ids" eval="[(4, ref('school_lost_found.group_lost_janitor'))]"/>
+        </record>
+
+    </data>
+</odoo>

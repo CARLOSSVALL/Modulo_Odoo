@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_school_student_admin,school.student (Admin),model_school_student,school_lost_found.group_lost_admin,1,1,1,1
+access_lost_object_category_admin,lost.object.category (Admin),model_lost_object_category,school_lost_found.group_lost_admin,1,1,1,1
+access_lost_object_admin,lost.object (Admin),model_lost_object,school_lost_found.group_lost_admin,1,1,1,1
+access_lost_object_deliver_wizard_admin,lost.object.deliver.wizard (Admin),model_lost_object_deliver_wizard,school_lost_found.group_lost_admin,1,1,1,1
+access_school_student_janitor,school.student (Conserje),model_school_student,school_lost_found.group_lost_janitor,1,0,0,0
+access_lost_object_category_janitor,lost.object.category (Conserje),model_lost_object_category,school_lost_found.group_lost_janitor,1,0,0,0
+access_lost_object_janitor,lost.object (Conserje),model_lost_object,school_lost_found.group_lost_janitor,1,1,1,0
+access_lost_object_deliver_wizard_janitor,lost.object.deliver.wizard (Conserje),model_lost_object_deliver_wizard,school_lost_found.group_lost_janitor,1,1,1,1

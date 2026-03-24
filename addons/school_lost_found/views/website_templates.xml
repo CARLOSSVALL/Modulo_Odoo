@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Layout minimalista para evitar errores de Odoo Website -->
+    <template id="lost_found_layout" name="Lost &amp; Found Layout">
+        &lt;!DOCTYPE html&gt;
+        <html t-att-lang="lang">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title t-esc="title or 'Objetos Perdidos'"/>
+                <link rel="icon" type="image/png" href="/school_lost_found/static/description/icon.png"/>
+                
+                <!-- Cargamos nuestros propios estilos directamente -->
+                <link rel="stylesheet" href="/school_lost_found/static/src/css/portal.css"/>
+                
+                <!-- FontAwesome (opcional, desde CDN para asegurar que carga) -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            </head>
+            <body style="margin: 0; padding: 0; background-color: #000000;">
+                <main id="wrap" style="width: 100vw; min-height: 100vh; background-color: #000000; overflow: hidden;">
+                    <t t-out="0"/>
+                </main>
+            </body>
+        </html>
+    </template>
+
+    <!-- PASO 1: Formulario de acceso -->
+    <template id="portal_gateway_template" name="Objetos Perdidos - Acceso">
+        <t t-call="school_lost_found.lost_found_layout">
+            <t t-set="title" t-value="page_title"/>
+            <div class="lf-gateway-wrapper" style="position: relative; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; background: #000000;">
+                <!-- Capa de Fondo Negro Total -->
+                <section class="lf-hero" style="position: absolute; top:0; left:0; width: 100%; height: 100%; padding-top: 8vh; z-index: 1; background: #000000;">
+                    <div class="lf-hero-content">
+                        <!-- Se eliminó el icono de la mochila 🎒 -->
+                        <h1 class="lf-hero-title" style="color: #ffffff;">Objetos Perdidos</h1>
+                        <p class="lf-hero-subtitle" style="color: #cccccc;">Comprueba si alguno de tus objetos está en conserjería.</p>
+                    </div>
+                </section>
+                
+                <!-- Tarjeta Frontal -->
+                <section class="lf-gateway-section" style="position: relative; z-index: 10; margin-top: 15vh;">
+                    <div class="lf-gateway-card" style="box-shadow: 0 20px 50px rgba(0,0,0,0.2);">
+                        <h2 class="lf-card-title">Introduce tu NIA</h2>
+                        <t t-if="error">
+                            <div class="lf-alert lf-alert-error">
+                                <span t-esc="error"/>
+                            </div>
+                        </t>
+                        <form method="POST" action="/objetos-perdidos" class="lf-form">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="lf-form-group">
+                                <label for="nia" class="lf-label">NIA del Alumno</label>
+                                <input type="text" id="nia" name="nia" class="lf-input" placeholder="Ej: 11111" required="required"/>
+                            </div>
+                            <button type="submit" class="lf-btn-primary" style="width: 100%">
+                                Acceder
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+    <!-- PASO 2: Galería de objetos -->
+    <template id="portal_gallery_template" name="Objetos Perdidos - Galería">
+        <t t-call="school_lost_found.lost_found_layout">
+            <t t-set="title" t-value="page_title"/>
+            <div class="lf-gallery-wrapper" style="background: #000000; min-height: 100vh;">
+                <section class="lf-hero" style="background: #000000;">
+                    <div class="lf-hero-content">
+                        <h1 class="lf-hero-title" style="color: #ffffff;">Hola, <strong t-esc="student.name"/></h1>
+                        <p class="lf-hero-subtitle" style="color: #cccccc;">Aquí tienes los objetos perdidos disponibles.</p>
+                        <a href="/objetos-perdidos" class="lf-btn-back">← Salir</a>
+                    </div>
+                </section>
+                <section class="lf-gallery-section">
+                    <t t-if="lost_objects">
+                        <div class="lf-grid">
+                            <t t-foreach="lost_objects" t-as="obj">
+                                <div class="lf-card">
+                                    <div class="lf-card-image-wrapper">
+                                        <t t-if="obj.photo">
+                                            <img t-att-src="image_data_uri(obj.photo)" class="lf-card-image" t-att-alt="obj.name"/>
+                                        </t>
+                                        <t t-if="not obj.photo">
+                                            <div class="lf-card-image-placeholder"></div>
+                                        </t>
+                                        <span class="lf-badge lf-badge-lost">Perdido</span>
+                                    </div>
+                                    <div class="lf-card-body">
+                                        <h3 class="lf-card-name" t-esc="obj.name"/>
+                                        <p class="lf-card-category"><t t-esc="obj.category_id.name if obj.category_id else 'Sin categoría'"/></p>
+                                        <p class="lf-card-date"><t t-esc="obj.registration_date"/></p>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                    <t t-if="not lost_objects">
+                        <div class="lf-empty-state">
+                            <h2>¡Todo recogido!</h2>
+                            <a href="/objetos-perdidos" class="lf-btn-primary">Volver</a>
+                        </div>
+                    </t>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

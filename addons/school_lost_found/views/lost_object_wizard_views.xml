@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ================================================================
+         VISTA: lost.object.deliver.wizard  (Popup Wizard)
+         ================================================================ -->
+
+    <record id="view_lost_object_deliver_wizard_form" model="ir.ui.view">
+        <field name="name">lost.object.deliver.wizard.form</field>
+        <field name="model">lost.object.deliver.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Entregar Objeto al Alumno">
+                <group>
+                    <field name="lost_object_id" readonly="1"/>
+                </group>
+                <group string="Datos del Alumno">
+                    <field name="nia"
+                           placeholder="Introduce el NIA del alumno..."
+                           autofocus="autofocus"/>
+                    <field name="student_id"
+                           readonly="1"
+                           invisible="not student_id"/>
+                </group>
+                <footer>
+                    <button name="action_confirm_delivery"
+                            string="✅ Confirmar Entrega"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancelar"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

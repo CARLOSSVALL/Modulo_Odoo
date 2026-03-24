@@ -1,0 +1,36 @@
+{
+    // ─────────────────────────────────────────────────────────────────────────
+    // Configuración para desarrollo de módulos Odoo en Docker
+    // El paquete 'odoo' está DENTRO del contenedor Docker, no en Windows.
+    // Estas opciones eliminan los falsos errores de importación.
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // Usa Pylance como motor de análisis (el más potente)
+    "python.languageServer": "Jedi",
+
+    // Modo básico: evita que Pylance marque en rojo módulos no instalados
+    "python.analysis.typeCheckingMode": "off",
+
+    // Suprimir TODOS los errores de módulos no encontrados
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingImports": "none",
+        "reportMissingModuleSource": "none",
+        "reportUndefinedVariable": "none",
+        "reportGeneralTypeIssues": "none",
+        "reportAttributeAccessIssue": "none"
+    },
+
+    // Desactivar el linter antiguo (ya reemplazado por Pylance)
+    "python.linting.enabled": false,
+
+    // Rutas extra donde buscar módulos Python (relativas al workspace)
+    "python.analysis.extraPaths": [
+        "./addons"
+    ],
+
+    // Ignorar patrones que no son parte del código fuente real
+    "python.analysis.exclude": [
+        "**/node_modules",
+        "**/__pycache__"
+    ]
+}

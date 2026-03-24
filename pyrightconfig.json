@@ -1,0 +1,15 @@
+{
+    "typeCheckingMode": "off",
+    "reportMissingImports": "none",
+    "reportMissingModuleSource": "none",
+    "reportUndefinedVariable": "none",
+    "reportGeneralTypeIssues": "none",
+    "reportAttributeAccessIssue": "none",
+    "extraPaths": [
+        "./addons"
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/__pycache__"
+    ]
+}

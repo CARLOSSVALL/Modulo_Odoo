@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    image: odoo:17.0
+    container_name: odoo_web
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      # Mapeamos la carpeta de forma estricta para asegurar que funcione:
+      - ./addons:/mnt/extra-addons
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+
+  db:
+    image: postgres:15
+    container_name: odoo_db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+    volumes:
+      # Este es el nuevo volumen de la base de datos para no perder tu info
+      - odoo-db-data:/var/lib/postgresql/data
+
+volumes:
+  odoo-db-data:

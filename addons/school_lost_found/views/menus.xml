@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ================================================================
+         MENÚS: Objetos Perdidos
+         ================================================================ -->
+
+    <!-- Menú Raíz -->
+    <menuitem id="menu_lost_found_root"
+              name="Objetos Perdidos"
+              sequence="50"
+              web_icon="school_lost_found,static/description/icon.png"
+              groups="school_lost_found.group_lost_janitor,school_lost_found.group_lost_admin"/>
+
+    <!-- Submenú: Objetos -->
+    <menuitem id="menu_lost_object"
+              name="Objetos Perdidos"
+              parent="menu_lost_found_root"
+              action="action_lost_object"
+              sequence="10"
+              groups="school_lost_found.group_lost_janitor,school_lost_found.group_lost_admin"/>
+
+    <!-- Submenú: Configuración -->
+    <menuitem id="menu_configuration"
+              name="Configuración"
+              parent="menu_lost_found_root"
+              sequence="90"
+              groups="school_lost_found.group_lost_admin"/>
+
+    <!-- Submenú: Categorías -->
+    <menuitem id="menu_lost_object_category"
+              name="Categorías"
+              parent="menu_configuration"
+              action="action_lost_object_category"
+              sequence="10"
+              groups="school_lost_found.group_lost_admin"/>
+
+    <!-- Submenú: Alumnos (solo Administrador) -->
+    <menuitem id="menu_school_students"
+              name="Alumnos"
+              parent="menu_configuration"
+              action="action_school_student"
+              sequence="20"
+              groups="school_lost_found.group_lost_admin"/>
+
+</odoo>
